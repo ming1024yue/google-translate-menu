@@ -1,0 +1,11 @@
+Google Translate Menu 0.1.0
+支持 macOS 13 或更新版本，Apple Silicon（M 系列）Mac。
+
+将 Google Translate Menu.app 拖入 Applications，然后从“应用程序”启动。
+菜单栏出现翻译气泡图标；不会显示 Dock 图标。
+单击打开/隐藏窗口，双击显示包含“退出”的系统菜单。
+Command + Shift + G 可立即打开/隐藏窗口。
+需要能够访问 translate.google.com 的网络。
+
+此应用是独立开发的网页客户端，非 Google 官方产品。
+使用 Google 翻译时，输入的内容由 Google 服务处理。
