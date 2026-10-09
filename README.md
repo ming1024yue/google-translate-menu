@@ -4,7 +4,9 @@
 
 ## 下载
 
-[GitHub Releases](https://github.com/ming1024yue/google-translate-menu/releases)
+**[直接下载 Mac 安装包（v0.1.0 · Apple Silicon）](https://github.com/ming1024yue/google-translate-menu/releases/download/v0.1.0/GoogleTranslateMenu-0.1.0-arm64.dmg)**
+
+[产品网站](https://yueming.xyz/products.html) · [版本说明与校验文件](https://github.com/ming1024yue/google-translate-menu/releases/tag/v0.1.0)
 
 支持 macOS 13+ 和 M 系列 Mac。下载 DMG，将应用拖入 Applications 后启动。
 应用与 DMG 已完成 Developer ID 签名、Apple 公证和 Gatekeeper 验证。
