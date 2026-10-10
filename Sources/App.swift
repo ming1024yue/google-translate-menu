@@ -16,10 +16,56 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var pendingClick: DispatchWorkItem?
     private let model = TranslatorModel()
 
+    private func menuBarLogo() -> NSImage {
+        let image = NSImage(size: NSSize(width: 18, height: 18), flipped: false) { _ in
+            NSColor.black.setStroke()
+            let back = NSBezierPath()
+            back.lineWidth = 1.1
+            back.lineJoinStyle = .round
+            back.move(to: NSPoint(x: 12.3, y: 13))
+            back.line(to: NSPoint(x: 15.5, y: 13))
+            back.curve(to: NSPoint(x: 17, y: 11.5), controlPoint1: NSPoint(x: 16.5, y: 13), controlPoint2: NSPoint(x: 17, y: 12.5))
+            back.line(to: NSPoint(x: 17, y: 2.5))
+            back.curve(to: NSPoint(x: 15.5, y: 1), controlPoint1: NSPoint(x: 17, y: 1.5), controlPoint2: NSPoint(x: 16.5, y: 1))
+            back.line(to: NSPoint(x: 10, y: 1))
+            back.line(to: NSPoint(x: 8.5, y: 4.5))
+            back.stroke()
+
+            let front = NSBezierPath()
+            front.lineWidth = 1.1
+            front.lineJoinStyle = .round
+            front.move(to: NSPoint(x: 2.5, y: 17))
+            front.line(to: NSPoint(x: 9.5, y: 17))
+            front.line(to: NSPoint(x: 13.3, y: 4.5))
+            front.line(to: NSPoint(x: 2.5, y: 4.5))
+            front.curve(to: NSPoint(x: 1, y: 6), controlPoint1: NSPoint(x: 1.5, y: 4.5), controlPoint2: NSPoint(x: 1, y: 5))
+            front.line(to: NSPoint(x: 1, y: 15.5))
+            front.curve(to: NSPoint(x: 2.5, y: 17), controlPoint1: NSPoint(x: 1, y: 16.5), controlPoint2: NSPoint(x: 1.5, y: 17))
+            front.close()
+            NSColor.black.setFill()
+            front.fill()
+
+            // Cut the G out of the filled sheet so it remains transparent in either appearance.
+            NSGraphicsContext.saveGraphicsState()
+            NSGraphicsContext.current?.cgContext.setBlendMode(.destinationOut)
+            ("G" as NSString).draw(at: NSPoint(x: 2.9, y: 6.3), withAttributes: [
+                .font: NSFont.systemFont(ofSize: 9.3, weight: .medium), .foregroundColor: NSColor.black
+            ])
+            NSGraphicsContext.restoreGraphicsState()
+            ("文" as NSString).draw(at: NSPoint(x: 10.2, y: 2.2), withAttributes: [
+                .font: NSFont.systemFont(ofSize: 6.5, weight: .medium), .foregroundColor: NSColor.black
+            ])
+            return true
+        }
+        image.isTemplate = true
+        image.accessibilityDescription = "Google Translate Menu"
+        return image
+    }
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        statusItem.button?.image = NSImage(systemSymbolName: "character.bubble", accessibilityDescription: "Google Translate Menu")
+        statusItem.button?.image = menuBarLogo()
         statusItem.button?.target = self
         statusItem.button?.action = #selector(statusItemClicked)
         statusItem.button?.toolTip = "单击打开 / 隐藏，双击显示菜单（⌘⇧G 打开 / 隐藏）"
@@ -62,7 +108,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let menu = NSMenu()
         let toggleItem = NSMenuItem(title: panel.isVisible ? "隐藏翻译窗口" : "打开翻译窗口", action: #selector(toggle), keyEquivalent: "")
         toggleItem.target = self
-        toggleItem.image = NSImage(systemSymbolName: "character.bubble", accessibilityDescription: nil)
+        toggleItem.image = menuBarLogo()
         menu.addItem(toggleItem)
         menu.addItem(.separator())
         let quitItem = NSMenuItem(title: "退出 Google Translate Menu", action: #selector(quit), keyEquivalent: "q")
